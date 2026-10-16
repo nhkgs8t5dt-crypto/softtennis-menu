@@ -1,0 +1,773 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>ソフトテニス部 練習メニュー帳</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700;900&display=swap"><style id="css">
+:root{
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  --bg:#F1F5F1; --surface:#FFFFFF; --ink:#14213D; --ink2:#4F5E75; --line:#D3DCD4;
+  --tint:#E2EFE6; --court:#4E9A6B; --focus:#2D5BE3; --danger:#C0392B;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0E1512; --surface:#17221D; --ink:#E9F0EA; --ink2:#A3B3A9; --line:#2B3B33;
+    --tint:#1B2D23; --court:#4E9A6B; --focus:#8EB4FF; --danger:#FF8A7A;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0E1512; --surface:#17221D; --ink:#E9F0EA; --ink2:#A3B3A9; --line:#2B3B33;
+  --tint:#1B2D23; --court:#4E9A6B; --focus:#8EB4FF; --danger:#FF8A7A;
+  color-scheme:dark;
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:inherit}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:"Zen Kaku Gothic New","Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic","Noto Sans JP",sans-serif;
+  font-weight:500;line-height:1.7;-webkit-text-size-adjust:100%;
+}
+.wrap{max-width:780px;margin:0 auto;padding:10px 16px 72px}
+h1{font-size:24px;line-height:1.35;margin:6px 0 10px;font-weight:900}
+h2{font-size:15px;margin:0 0 4px;font-weight:900}
+p{margin:0}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+
+.btn{font-weight:700;border:1.5px solid var(--ink);background:transparent;color:var(--ink);border-radius:10px;padding:8px 14px;min-height:44px;cursor:pointer}
+.btn.primary{background:var(--ink);color:var(--bg)}
+.btn.small{min-height:38px;padding:5px 12px;font-size:14px}
+.btn.danger{border-color:var(--danger);color:var(--danger)}
+.btn.plain{border-color:transparent;padding-left:0}
+.btn[disabled]{opacity:.45}
+.back{margin-bottom:2px}
+
+.tbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;display:flex;gap:8px;align-items:center;padding:8px 0;background:var(--bg)}
+.tbar .sp{flex:1}
+.pd{display:inline-block;width:9px;height:9px;border-radius:50%;background:#E4572E;margin-left:7px;vertical-align:middle}
+
+.chip{display:inline-block;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:1px 11px;font-size:13px;font-weight:700;line-height:1.7}
+button.chip{cursor:pointer;min-height:34px}
+.chip.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0}
+
+.search{display:flex;gap:8px;margin:8px 0 6px}
+input[type=text],input[type=search],textarea,select{width:100%;border:1.5px solid var(--line);background:var(--surface);border-radius:10px;padding:9px 11px;font-size:16px}
+textarea{resize:vertical}
+.fld{display:block;margin:12px 0}
+.fld>span{display:block;font-size:13px;font-weight:700;color:var(--ink2);margin-bottom:3px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+
+.mlist{display:grid;gap:10px;margin-top:10px}
+@media(min-width:640px){.mlist{grid-template-columns:1fr 1fr}}
+.mcard{display:grid;grid-template-columns:92px 1fr;gap:12px;padding:10px;background:var(--surface);border:1px solid var(--line);border-radius:12px;cursor:pointer;text-align:left;width:100%}
+.mcard .th svg{display:block;width:100%;height:auto;border-radius:6px}
+.mcard h3{margin:0 0 2px;font-size:16px;line-height:1.4;font-weight:900}
+.mcard .pu{font-size:13px;color:var(--ink2);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.mcard .meta{font-size:12px;color:var(--ink2);margin-top:3px}
+.empty{padding:28px 16px;text-align:center;color:var(--ink2);border:1.5px dashed var(--line);border-radius:12px;margin-top:12px}
+
+.aim{background:var(--tint);border-radius:12px;padding:12px 14px;margin:10px 0}
+.aim p{font-size:16px;font-weight:700}
+.facts{display:flex;flex-wrap:wrap;gap:6px 18px;margin:8px 0 12px;font-size:14px}
+.facts div{display:flex;gap:6px}
+.facts dt{color:var(--ink2);font-weight:700}
+.facts dd{margin:0;font-weight:700}
+
+.seg{display:flex;border:1.5px solid var(--ink);border-radius:10px;overflow:hidden;margin:10px 0}
+.seg button{flex:1;border:0;background:transparent;font-weight:700;padding:9px 6px;min-height:44px;cursor:pointer}
+.seg button.on{background:var(--ink);color:var(--bg)}
+
+.fig{max-width:440px;margin:8px auto}
+svg.court{display:block;width:100%;height:auto;border-radius:10px;touch-action:pan-y}
+.edcourt{max-width:440px;margin:6px auto;touch-action:none;user-select:none;-webkit-user-select:none}
+.edcourt svg.court{touch-action:none}
+
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:13px;margin:8px 0;align-items:center;font-weight:700}
+.lg{display:inline-flex;gap:5px;align-items:center}
+.dot{display:inline-block;width:14px;height:14px;border-radius:50%;border:1.5px solid #14213D}
+
+.sn{display:inline-grid;place-items:center;min-width:26px;height:26px;border-radius:50%;background:var(--ink);color:var(--bg);font-weight:900;font-size:14px;flex:none}
+.steps{list-style:none;margin:10px 0;padding:0;display:grid;gap:8px}
+.steps li{display:flex;gap:10px;align-items:flex-start}
+.steps li p{padding-top:1px}
+
+.stepgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0}
+.stepgrid.one{grid-template-columns:1fr}
+.scard{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:8px;cursor:pointer}
+.scard.zoom{grid-column:1/-1}
+.scard.zoom svg.court{max-width:440px;margin:0 auto}
+.scard .sh{display:flex;gap:8px;align-items:center;margin-bottom:6px}
+.scard p{font-size:13px;line-height:1.6;margin-top:6px}
+.scard.zoom p{font-size:15px}
+.sz{font-size:12px;color:var(--ink2);margin-left:auto}
+
+.notes{border-top:1.5px solid var(--line);padding-top:10px;margin-top:14px}
+.acts{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+
+.stabs{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.stab{width:44px;height:44px;border-radius:50%;border:1.5px solid var(--ink);background:transparent;font-weight:900;cursor:pointer}
+.stab.on{background:var(--ink);color:var(--bg)}
+.tools{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:8px 0}
+.tools .btn{padding:6px 4px;font-size:14px}
+.tools .btn.on{background:var(--ink);color:var(--bg)}
+.subtools{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0}
+.hint{font-size:13px;color:var(--ink2);min-height:22px}
+.irow{display:flex;gap:8px;align-items:center;margin:6px 0;font-size:14px;font-weight:700}
+.irow select{width:auto;flex:none;padding:6px 8px;font-size:14px}
+.irow .grow{flex:1}
+.prow{display:grid;grid-template-columns:1fr 78px auto;gap:8px;align-items:center;margin:6px 0}
+.sub{font-size:13px;font-weight:900;color:var(--ink2);margin:14px 0 2px}
+details.bk{margin-top:22px;border-top:1.5px solid var(--line);padding-top:10px}
+details.bk summary{cursor:pointer;font-weight:700}
+.banner{display:flex;gap:8px;align-items:center;flex-wrap:wrap;background:var(--tint);border-radius:10px;padding:8px 12px;margin:8px 0;font-size:14px;font-weight:700}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:10px;font-weight:700;font-size:14px;z-index:20;max-width:90%;text-align:center}
+</style></head><body><div id="root"></div><script id="data" type="application/json">{"title":"ソフトテニス部 練習メニュー帳","menus":[{"id":"m1","title":"後衛 左右の切り返しストローク","purpose":"ベースライン上で左右に振られても、体勢を崩さずに打ち切り、すぐセンターへ戻る力をつける。","tags":["後衛","基礎","フットワーク","切り返し"],"people":"後衛1人＋球出し1人","time":"1人5分（交代制）","gear":"ボール20球","notes":"打った後は必ずセンターまで戻ってから次の球を待つ。球出しは一定のリズムで出し、慣れてきたらコースと間隔を変える。","view":"half","players":[{"id":"b1","role":"back","label":"後","x":5.5,"y":22.6},{"id":"f1","role":"feeder","label":"球","x":5.5,"y":9.8}],"steps":[{"text":"球出し者が後衛の右側（フォア側）へ、少し深めの球を出す。後衛はサイドステップで右へ動いて打つ。","balls":[{"kind":"feed","x1":5.5,"y1":9.8,"x2":8.7,"y2":21.2}],"moves":[{"pid":"b1","x":8.3,"y":22}]},{"text":"球出し者へ打ち返したら、すぐセンター（ベースライン中央）へ戻る。","balls":[{"kind":"hit","x1":8.3,"y1":22,"x2":5.9,"y2":10.7}],"moves":[{"pid":"b1","x":5.5,"y":22.6}]},{"text":"次は左側（バック側）へ球を出す。後衛は左へ動いて打つ。","balls":[{"kind":"feed","x1":5.5,"y1":9.8,"x2":2.3,"y2":21.2}],"moves":[{"pid":"b1","x":2.7,"y":22}]},{"text":"打ち返して、再びセンターへ戻る。①〜④を1セットとして繰り返す。","balls":[{"kind":"hit","x1":2.7,"y1":22,"x2":5.1,"y2":10.7}],"moves":[{"pid":"b1","x":5.5,"y":22.6}]}]},{"id":"m2","title":"前衛 ネット前の左右の動き（ボレー）","purpose":"ネット前で左右に出された球へ素早く踏み込み、ボレーで相手コートの空いた所へ決める。打った後はネット中央へ戻る癖をつける。","tags":["前衛","基礎","ボレー","ネット前の動き"],"people":"前衛1人＋球出し1人","time":"左右各5球×2セット","gear":"ボール15球","notes":"ラケット面を早く作り、足は止めずに踏み込む。打った後に後ろへ下がらず、ネット中央へ戻る。","view":"full","players":[{"id":"p1","role":"front","label":"前","x":5.5,"y":13.3},{"id":"p2","role":"feeder","label":"球","x":5.5,"y":7.5}],"steps":[{"text":"球出し者が前衛の右側へ球を出す。前衛は右へ踏み込む。","balls":[{"kind":"feed","x1":5.5,"y1":7.5,"x2":8.8,"y2":13.9}],"moves":[{"pid":"p1","x":8,"y":13.2}]},{"text":"ボレーで相手コート左奥の空いたところへ打ち、ネット中央へ戻る。","balls":[{"kind":"hit","x1":8,"y1":13.2,"x2":2,"y2":5}],"moves":[{"pid":"p1","x":5.5,"y":13.3}]},{"text":"今度は前衛の左側へ球を出す。前衛は左へ踏み込む。","balls":[{"kind":"feed","x1":5.5,"y1":7.5,"x2":2.2,"y2":13.9}],"moves":[{"pid":"p1","x":3,"y":13.2}]},{"text":"ボレーで相手コート右奥へ打ち、ネット中央へ戻る。","balls":[{"kind":"hit","x1":3,"y1":13.2,"x2":9,"y2":5}],"moves":[{"pid":"p1","x":5.5,"y":13.3}]}]},{"id":"q2lg4l","title":"スマッシュフォローからの展開（精度向上）","purpose":"①下がりながら打つスマッシュ力とスマッシュフォローに対応できるようにする。\n②スマッシュとフォローの精度を上げる。","tags":["前衛","展開","スマッシュ","スマッシュフォロー","オールラウンド"],"people":"前衛2人＋他3人（前後問わない）＋球出し1人","time":"10分","gear":"","notes":"・スマッシュフォロー側はサービスライン内にとどまり、下がりすぎない。\n・重心を低く構え、テイクバックは小さくする。\n・スマッシュのフォローは無理に打たず、ラケットにまず当てることを意識。","view":"full","players":[{"id":"3unsuh","role":"feeder","label":"球","x":8.6,"y":24.3},{"id":"jvamyo","role":"other","label":"他1","x":2.9,"y":12.9},{"id":"9f9t8a","role":"other","label":"他2","x":5.7,"y":12.8},{"id":"8yvarr","role":"other","label":"他3","x":8.1,"y":13.1},{"id":"gf6gsv","role":"front","label":"前1","x":4.5,"y":9.6},{"id":"3ap309","role":"front","label":"前2","x":7.2,"y":9.6}],"steps":[{"text":"球出しはストレートにロブを上げ、前2が下がってスマッシュを打つ。あるいは前1が斜め後ろに下がってスマッシュを打つ。前1が打つときは前2は逆サイドに移動する。スマッシュのコースはどこでもよい。","balls":[{"kind":"feed","x1":8.6,"y1":24.3,"x2":8.8,"y2":4.8}],"moves":[{"pid":"3ap309","x":8,"y":4.7}]},{"text":"手前コートの3人はスマッシュを打つ前衛がロブを追い始めたら早めに下がって構え、スマッシュをフォローする。（誰がフォローしてもよい。）","balls":[{"kind":"hit","x1":8,"y1":4.7,"x2":5,"y2":14.8}],"moves":[{"pid":"jvamyo","x":2.8,"y":15.7},{"pid":"9f9t8a","x":5.4,"y":15.6},{"pid":"8yvarr","x":8.1,"y":15.7},{"pid":"gf6gsv","x":3.6,"y":6.9}]},{"text":"スマッシュフォロー後は3対2でボレーボレーを続ける。スマッシュ側はチャンスがあればスマッシュを狙う。ラリーが切れたら、球出しは再度ボールを出す。\n※球出しは自分方向にボールが来ることを予想し、必ず構えること。\n※球出しはロブの軌道を変えたり、コースを変えても可。","balls":[{"kind":"hit","x1":5.4,"y1":15.6,"x2":4.1,"y2":8.5},{"kind":"hit","x1":3.6,"y1":6.9,"x2":2.7,"y2":14.4},{"kind":"hit","x1":2.8,"y1":15.7,"x2":8.1,"y2":8.3}],"moves":[]}]},{"id":"a8wy7y","title":"相手のつなぎロブからのスマッシュ＆フォロー","purpose":"後衛2=相手の移動とバックハンドを誘発させるための返球コントロール。\n前衛2＝相手の緩い球を狙う動き、下がりながらのスマッシュの安定性。\n後衛1＝移動させられてもバックハンドで確実に返球する。スマッシュを打たれても決めさせない。\n前衛1＝味方後衛の不利を悟り、フォローに入る動きの定着・スマッシュを打たれても決めさせない。","tags":["前衛","展開","スマッシュ","スマッシュフォロー"],"people":"前衛2人＋後衛2人","time":"15分","gear":"","notes":"・スマッシュ側は攻撃的な展開を作り、スマッシュを確実に打ち切ること。\n・フォロー側は迅速に守備ラインを作り、前衛後衛フォローで簡単に決めさせないようにすること。\n※手順2の後衛1のバックロブは徐々に深めに上げて、スマッシュ側に難度の高いスマッシュになるようにすると効果的。","view":"full","players":[{"id":"q1omzx","role":"back","label":"後1","x":8.7,"y":24},{"id":"j2fc9i","role":"back","label":"後2","x":3,"y":-0.1},{"id":"tv54os","role":"front","label":"前1","x":3.7,"y":12.9},{"id":"sm10a8","role":"front","label":"前2","x":7.2,"y":10.9}],"steps":[{"text":"相雁行・クロス展開からスタート。後衛1から後衛2に球出しをする。後衛2はストレートに深いロブを上げる。","balls":[{"kind":"feed","x1":8.7,"y1":24,"x2":2.7,"y2":0.8},{"kind":"hit","x1":3,"y1":-0.1,"x2":0.6,"y2":23.2}],"moves":[{"pid":"q1omzx","x":1.9,"y":24}]},{"text":"後衛1は左方向にボールを追い、バックハンドでロブを上げる。前衛2は相手の後衛の緩いロブを予想し、スマッシュの打点に移動する。前衛1は前衛2のスマッシュ態勢を見たら、右サイド後方（サービスライン or ベースライン）へポジションを移し、フォローに備える。","balls":[{"kind":"hit","x1":0,"y1":22.9,"x2":7.5,"y2":4.2}],"moves":[{"pid":"tv54os","x":7.3,"y":17.8},{"pid":"sm10a8","x":8,"y":4.8}]},{"text":"前衛2のスマッシュを前衛1と後衛1はフォローする。そこからフリーでラリーを続ける。\n※前衛1は場合によってはベースラインまでさがるフォローを試し、その後の展開にチャレンジしてもよい。","balls":[{"kind":"hit","x1":8,"y1":4.8,"x2":0.6,"y2":18.6},{"kind":"hit","x1":8,"y1":4.8,"x2":5.3,"y2":23.5},{"kind":"hit","x1":8,"y1":4.8,"x2":9.9,"y2":17.3}],"moves":[{"pid":"tv54os","x":9,"y":23.2}]}]},{"id":"aocl4x","title":"新しい練習メニュー","purpose":"","tags":[],"people":"","time":"","gear":"","notes":"","view":"half","players":[],"steps":[{"text":"","balls":[],"moves":[]}]}]}</script><script id="app">
+(function(){
+'use strict';
+
+/* ---------- 基本定数 ---------- */
+var FONT="'Zen Kaku Gothic New','Hiragino Sans','Hiragino Kaku Gothic ProN','Yu Gothic','Noto Sans JP',sans-serif";
+var FONT_HREF='https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700;900&display=swap';
+var C={W:10.97,L:23.77,SW:8.23,SVC:6.40};
+var NET=C.L/2;
+var R=0.85;
+var ROLES={
+  back:{name:'後衛',short:'後',fill:'#E4572E',ink:'#FFFFFF',halo:'#FFFFFF'},
+  front:{name:'前衛',short:'前',fill:'#2D5BE3',ink:'#FFFFFF',halo:'#FFFFFF'},
+  feeder:{name:'球出し',short:'球',fill:'#F5C518',ink:'#14213D',halo:'#14213D'},
+  other:{name:'その他',short:'他',fill:'#FFFFFF',ink:'#14213D',halo:'#14213D'}
+};
+var KINDS={
+  feed:{name:'球出し',color:'#FFE14D'},
+  hit:{name:'打球',color:'#8EF0FF'}
+};
+var DRAFT='sbt-draft-v1';
+
+var $=function(s,el){return (el||document).querySelector(s);};
+var esc=function(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});};
+var nl=function(s){return esc(s).replace(/\n/g,'<br>');};
+var num=function(n){return Math.round(n*100)/100;};
+var uid=function(){return Math.random().toString(36).slice(2,8);};
+var r1=function(n){return Math.round(n*10)/10;};
+var dist=function(a,b){return Math.hypot(a[0]-b[0],a[1]-b[1]);};
+
+/* ---------- データ ---------- */
+var DATA;
+try{DATA=JSON.parse($('#data').textContent);}catch(e){DATA={title:'練習メニュー帳',menus:[]};}
+function normalize(){
+  if(!DATA||typeof DATA!=='object') DATA={title:'練習メニュー帳',menus:[]};
+  if(!Array.isArray(DATA.menus)) DATA.menus=[];
+  DATA.title=DATA.title||'練習メニュー帳';
+  DATA.menus.forEach(function(m){
+    m.id=m.id||uid(); m.title=m.title||''; m.purpose=m.purpose||''; m.tags=Array.isArray(m.tags)?m.tags:[];
+    m.people=m.people||''; m.time=m.time||''; m.gear=m.gear||''; m.notes=m.notes||'';
+    m.view=m.view==='full'?'full':'half';
+    m.players=Array.isArray(m.players)?m.players:[];
+    m.steps=Array.isArray(m.steps)&&m.steps.length?m.steps:[{text:'',balls:[],moves:[]}];
+    m.steps.forEach(function(s){s.text=s.text||'';s.balls=s.balls||[];s.moves=s.moves||[];});
+  });
+}
+normalize();
+
+var CAP={artifact:null,downloads:null};
+var S={screen:'home',id:null,mode:'all',one:false,q:'',tag:'',canEdit:false,preview:false,dirty:false,zoom:{},
+  ed:{tab:'info',step:0,tool:'select',role:'back',kind:'feed',pending:null,pendingPid:null,all:false,keepStart:false}};
+
+var canE=function(){return S.canEdit&&!S.preview;};
+var curMenu=function(){return DATA.menus.filter(function(m){return m.id===S.id;})[0];};
+var byId=function(m){var o={};m.players.forEach(function(p){o[p.id]=p;});return o;};
+
+/* ---------- 下書き ---------- */
+var draftTimer=null;
+function touch(){
+  S.dirty=true;
+  clearTimeout(draftTimer);
+  draftTimer=setTimeout(function(){try{localStorage.setItem(DRAFT,JSON.stringify(DATA));}catch(e){}},400);
+  var b=$('[data-act="publish"]');
+  if(b&&!b.querySelector('.pd')) b.insertAdjacentHTML('beforeend','<i class="pd"></i>');
+}
+function readDraft(){try{var d=localStorage.getItem(DRAFT);return d?JSON.parse(d):null;}catch(e){return null;}}
+function draftDiffers(){var d=readDraft();return !!d&&JSON.stringify(d)!==JSON.stringify(DATA);}
+
+/* ---------- コート描画 ---------- */
+function viewBoxFor(view){
+  var mx=2.8;
+  if(view==='half') return [-mx,NET-3.2,C.W+2*mx,C.L/2+3.2+3.0];
+  return [-mx,-3.0,C.W+2*mx,C.L+6.0];
+}
+function courtBase(){
+  var W=C.W,L=C.L,i=(W-C.SW)/2,s=C.SVC;
+  var ln='stroke="#F4F7F2" stroke-width="0.1" fill="none"';
+  var o='<rect x="-30" y="-30" width="80" height="90" fill="#3A7A54"/>';
+  o+='<rect x="0" y="0" width="'+W+'" height="'+L+'" fill="#4E9A6B"/>';
+  o+='<rect x="0" y="0" width="'+W+'" height="'+L+'" '+ln+'/>';
+  o+='<line x1="'+i+'" y1="0" x2="'+i+'" y2="'+L+'" '+ln+'/>';
+  o+='<line x1="'+(W-i)+'" y1="0" x2="'+(W-i)+'" y2="'+L+'" '+ln+'/>';
+  o+='<line x1="'+i+'" y1="'+(NET-s)+'" x2="'+(W-i)+'" y2="'+(NET-s)+'" '+ln+'/>';
+  o+='<line x1="'+i+'" y1="'+(NET+s)+'" x2="'+(W-i)+'" y2="'+(NET+s)+'" '+ln+'/>';
+  o+='<line x1="'+(W/2)+'" y1="'+(NET-s)+'" x2="'+(W/2)+'" y2="'+(NET+s)+'" '+ln+'/>';
+  o+='<line x1="-0.9" y1="'+NET+'" x2="'+(W+0.9)+'" y2="'+NET+'" stroke="#14213D" stroke-width="0.3"/>';
+  o+='<line x1="-0.9" y1="'+NET+'" x2="'+(W+0.9)+'" y2="'+NET+'" stroke="#FFFFFF" stroke-width="0.1" stroke-dasharray="0.22 0.22"/>';
+  o+='<circle cx="-0.9" cy="'+NET+'" r="0.22" fill="#14213D"/><circle cx="'+(W+0.9)+'" cy="'+NET+'" r="0.22" fill="#14213D"/>';
+  return o;
+}
+function arrow(x1,y1,x2,y2,o){
+  var dx=x2-x1,dy=y2-y1,d=Math.hypot(dx,dy);
+  if(d<0.3) return '';
+  var ux=dx/d,uy=dy/d,head=o.head||0.8,w=o.w||0.22;
+  var bx=x2-ux*head*0.8,by=y2-uy*head*0.8,px=-uy,py=ux,hw=head*0.5;
+  var pts=num(x2)+','+num(y2)+' '+num(bx+px*hw)+','+num(by+py*hw)+' '+num(bx-px*hw)+','+num(by-py*hw);
+  var da=o.dash?' stroke-dasharray="'+o.dash+'"':'';
+  return '<line x1="'+num(x1)+'" y1="'+num(y1)+'" x2="'+num(bx)+'" y2="'+num(by)+'" stroke="'+o.halo+'" stroke-width="'+(w+0.2)+'"'+da+'/>'
+    +'<polygon points="'+pts+'" fill="'+o.color+'" stroke="'+o.halo+'" stroke-width="0.13" stroke-linejoin="round"/>'
+    +'<line x1="'+num(x1)+'" y1="'+num(y1)+'" x2="'+num(bx)+'" y2="'+num(by)+'" stroke="'+o.color+'" stroke-width="'+w+'"'+da+'/>';
+}
+function badge(x,y,n){
+  return '<circle cx="'+num(x)+'" cy="'+num(y)+'" r="0.58" fill="#14213D" stroke="#FFFFFF" stroke-width="0.09"/>'
+    +'<text x="'+num(x)+'" y="'+num(y+0.27)+'" font-size="0.78" font-weight="900" fill="#FFFFFF" text-anchor="middle">'+n+'</text>';
+}
+function playerSVG(p,x,y,o){
+  o=o||{};
+  var r=ROLES[p.role]||ROLES.other,lab=p.label||r.short;
+  var fs=lab.length<=1?0.95:(lab.length===2?0.74:0.58);
+  return '<g opacity="'+(o.ghost?0.55:1)+'"><circle cx="'+num(x)+'" cy="'+num(y)+'" r="'+R+'" fill="'+r.fill+'" stroke="#14213D" stroke-width="0.12"'+(o.ghost?' stroke-dasharray="0.3 0.2"':'')+'/>'
+    +'<text x="'+num(x)+'" y="'+num(y+fs*0.36)+'" font-size="'+fs+'" font-weight="900" fill="'+r.ink+'" text-anchor="middle">'+esc(lab)+'</text></g>';
+}
+function posAt(m,k){
+  var pos={};m.players.forEach(function(p){pos[p.id]=[p.x,p.y];});
+  for(var i=0;i<k&&i<m.steps.length;i++){m.steps[i].moves.forEach(function(mv){if(pos[mv.pid])pos[mv.pid]=[mv.x,mv.y];});}
+  return pos;
+}
+function clip(a,b,cands){
+  var A=a,B=b;
+  if(dist(a,b)<0.05) return [a,b];
+  for(var i=0;i<cands.length;i++){
+    var q=cands[i];
+    if(dist(q,a)<=R+0.5&&dist(q,b)>R+0.5){
+      var d=dist(q,b),u=[(b[0]-q[0])/d,(b[1]-q[1])/d];
+      A=[q[0]+u[0]*R,q[1]+u[1]*R];break;
+    }
+  }
+  for(var j=0;j<cands.length;j++){
+    var c=cands[j];
+    if(dist(c,b)<=R+0.4&&dist(c,A)>R+0.6){
+      var dd=dist(A,c),v=[(c[0]-A[0])/dd,(c[1]-A[1])/dd];
+      B=[c[0]-v[0]*(R+0.08),c[1]-v[1]*(R+0.08)];break;
+    }
+  }
+  if(dist(A,B)<0.5) return [a,b];
+  return [A,B];
+}
+function geom(m,k){
+  var pos=posAt(m,k),st=m.steps[k],pl=byId(m),cands=[],moves=[];
+  Object.keys(pos).forEach(function(id){cands.push(pos[id]);});
+  st.moves.forEach(function(mv,idx){
+    var p=pl[mv.pid];if(!p||!pos[mv.pid])return;
+    moves.push({idx:idx,p:p,from:pos[mv.pid],to:[mv.x,mv.y]});cands.push([mv.x,mv.y]);
+  });
+  var balls=st.balls.map(function(b,idx){
+    var c=clip([b.x1,b.y1],[b.x2,b.y2],cands);
+    return {idx:idx,kind:b.kind,a:c[0],e:c[1]};
+  });
+  balls.forEach(function(b){
+    if(b.kind!=='hit')return;
+    var raw=st.balls[b.idx],grp=[];
+    balls.forEach(function(o){var r2=st.balls[o.idx];if(o.kind==='hit'&&Math.hypot(r2.x1-raw.x1,r2.y1-raw.y1)<0.7)grp.push(o.idx);});
+    if(grp.length>1){var gi=grp.indexOf(b.idx);b.label=String.fromCharCode(65+gi);b.skipBadge=gi>0;}
+  });
+  return {pos:pos,moves:moves,balls:balls};
+}
+function moveArrow(mv){
+  var d=dist(mv.from,mv.to);
+  if(d<2*R+0.6) return '';
+  var u=[(mv.to[0]-mv.from[0])/d,(mv.to[1]-mv.from[1])/d],ro=ROLES[mv.p.role]||ROLES.other;
+  return arrow(mv.from[0]+u[0]*R,mv.from[1]+u[1]*R,mv.to[0]-u[0]*(R+0.05),mv.to[1]-u[1]*(R+0.05),{color:ro.fill,halo:ro.halo,w:0.26,head:0.9});
+}
+function branchLabel(b){
+  var d=dist(b.a,b.e);if(d<1.5)return '';
+  var ux=(b.e[0]-b.a[0])/d,uy=(b.e[1]-b.a[1])/d;
+  var x=b.a[0]+(b.e[0]-b.a[0])*0.8-uy*0.8,y=b.a[1]+(b.e[1]-b.a[1])*0.8+ux*0.8;
+  return '<circle cx="'+num(x)+'" cy="'+num(y)+'" r="0.52" fill="#FFFFFF" stroke="#14213D" stroke-width="0.1"/><text x="'+num(x)+'" y="'+num(y+0.25)+'" font-size="0.7" font-weight="900" fill="#14213D" text-anchor="middle">'+b.label+'</text>';
+}
+function ballArrow(b){
+  var k=KINDS[b.kind]||KINDS.feed;
+  return arrow(b.a[0],b.a[1],b.e[0],b.e[1],{color:k.color,halo:'#0B2418',w:0.22,dash:'0.55 0.38',head:0.8})+(b.label?branchLabel(b):'');
+}
+function along(a,b,t){return [a[0]+(b[0]-a[0])*t,a[1]+(b[1]-a[1])*t];}
+
+function courtInner(m,o){
+  o=o||{};
+  var g=courtBase(),L={ghost:'',moves:'',balls:'',players:'',badges:'',ui:''};
+  var all=o.mode==='all';
+  if(all){
+    var p0=posAt(m,0);
+    m.players.forEach(function(p){L.players+=playerSVG(p,p0[p.id][0],p0[p.id][1]);});
+    m.steps.forEach(function(st,k){
+      var gm=geom(m,k);
+      gm.moves.forEach(function(mv){
+        L.ghost+=playerSVG(mv.p,mv.to[0],mv.to[1],{ghost:true});
+        L.moves+=moveArrow(mv);
+        if(dist(mv.from,mv.to)>=2*R+0.6){var q=along(mv.from,mv.to,0.5);L.badges+=badge(q[0],q[1],k+1);}
+      });
+      gm.balls.forEach(function(b){
+        L.balls+=ballArrow(b);
+        if(!b.skipBadge){var q=along(b.a,b.e,0.42);L.badges+=badge(q[0],q[1],k+1);}
+      });
+    });
+  }else{
+    var k=Math.min(o.mode||0,m.steps.length-1),gm2=geom(m,k),pl=byId(m);
+    gm2.moves.forEach(function(mv){L.ghost+=playerSVG(mv.p,mv.to[0],mv.to[1],{ghost:true});L.moves+=moveArrow(mv);});
+    gm2.balls.forEach(function(b){L.balls+=ballArrow(b);});
+    m.players.forEach(function(p){var q=gm2.pos[p.id];L.players+=playerSVG(p,q[0],q[1]);});
+    if(o.edit){
+      var st=m.steps[k];
+      if(k===0) m.players.forEach(function(p){L.ui+='<circle data-h="p:'+p.id+'" cx="'+num(p.x)+'" cy="'+num(p.y)+'" r="1.15" fill="transparent"/>';});
+      gm2.moves.forEach(function(mv){L.ui+='<circle data-h="m:'+mv.idx+'" cx="'+num(mv.to[0])+'" cy="'+num(mv.to[1])+'" r="1.15" fill="transparent"/>';});
+      var dot=function(x,y,h){return '<circle cx="'+num(x)+'" cy="'+num(y)+'" r="0.36" fill="#FFFFFF" stroke="#14213D" stroke-width="0.1"/><circle data-h="'+h+'" cx="'+num(x)+'" cy="'+num(y)+'" r="0.85" fill="transparent"/>';};
+      st.balls.forEach(function(b,i){L.ui+=dot(b.x1,b.y1,'b:'+i+':a')+dot(b.x2,b.y2,'b:'+i+':b');});
+      if(o.pending) L.ui+='<circle cx="'+num(o.pending[0])+'" cy="'+num(o.pending[1])+'" r="0.55" fill="#FFFFFF" fill-opacity="0.5" stroke="#FFFFFF" stroke-width="0.14" stroke-dasharray="0.25 0.2"/>';
+      if(o.pendingPid&&gm2.pos[o.pendingPid]){var pp=gm2.pos[o.pendingPid];L.ui+='<circle cx="'+num(pp[0])+'" cy="'+num(pp[1])+'" r="1.3" fill="none" stroke="#FFFFFF" stroke-width="0.16" stroke-dasharray="0.3 0.2"/>';}
+    }
+  }
+  return '<g font-family="'+FONT+'">'+g+L.ghost+L.moves+L.balls+L.players+L.badges+L.ui+'</g>';
+}
+function courtSVG(m,o,cls){
+  var vb=viewBoxFor(m.view);
+  return '<svg class="'+(cls||'court')+'" viewBox="'+vb.join(' ')+'" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="コート図">'+courtInner(m,o)+'</svg>';
+}
+
+/* ---------- 凡例 ---------- */
+function lgLine(color,dash){
+  return '<svg width="34" height="12" viewBox="0 0 34 12" aria-hidden="true"><rect width="34" height="12" rx="3" fill="#4E9A6B"/><line x1="3" y1="6" x2="24" y2="6" stroke="'+color+'" stroke-width="2.4"'+(dash?' stroke-dasharray="4 3"':'')+'/><polygon points="31,6 23,2 23,10" fill="'+color+'"/></svg>';
+}
+function legendHTML(m){
+  var roles={},kinds={},mv=false;
+  m.players.forEach(function(p){roles[p.role]=1;});
+  m.steps.forEach(function(s){s.balls.forEach(function(b){kinds[b.kind]=1;});if(s.moves.length)mv=true;});
+  var h='';
+  Object.keys(ROLES).forEach(function(r){if(roles[r])h+='<span class="lg"><i class="dot" style="background:'+ROLES[r].fill+'"></i>'+ROLES[r].name+'</span>';});
+  Object.keys(KINDS).forEach(function(k){if(kinds[k])h+='<span class="lg">'+lgLine(KINDS[k].color,true)+KINDS[k].name+'</span>';});
+  if(mv)h+='<span class="lg">'+lgLine('#FFFFFF',false)+'選手の移動（薄い丸が移動先）</span>';
+  var br=false;
+  m.steps.forEach(function(s,k){geom(m,k).balls.forEach(function(b){if(b.label)br=true;});});
+  if(br)h+='<span class="lg"><i class="dot" style="background:#FFFFFF"></i>A・B…は打ち分け先（どちらかへ打つ）</span>';
+  return '<div class="legend">'+h+'</div>';
+}
+
+/* ---------- 画面 ---------- */
+function tagsHTML(t){return (t||[]).map(function(x){return '<span class="chip">'+esc(x)+'</span>';}).join('');}
+function topbar(){
+  if(!S.canEdit) return '';
+  return '<div class="tbar"><button class="btn small" data-act="preview">'+(S.preview?'編集に戻る':'生徒の表示で確認')+'</button><span class="sp"></span>'
+    +(CAP.artifact&&!S.preview?'<button class="btn primary small" data-act="publish">共有に反映'+(S.dirty?'<i class="pd"></i>':'')+'</button>':'')+'</div>';
+}
+function homeHTML(){
+  var q=S.q.trim().toLowerCase(),tags={};
+  DATA.menus.forEach(function(m){m.tags.forEach(function(t){tags[t]=1;});});
+  var list=DATA.menus.filter(function(m){
+    if(S.tag&&m.tags.indexOf(S.tag)<0) return false;
+    if(!q) return true;
+    return (m.title+' '+m.purpose+' '+m.tags.join(' ')+' '+m.notes).toLowerCase().indexOf(q)>=0;
+  });
+  var e=canE();
+  var h='<div class="wrap">'+topbar();
+  if(e&&draftDiffers()) h+='<div class="banner">保存されていない下書きがあります<button class="btn small" data-act="draftload">復元</button><button class="btn small" data-act="draftdrop">破棄</button></div>';
+  h+=e?'<input type="text" data-app="title" value="'+esc(DATA.title)+'" aria-label="タイトル" style="font-size:20px;font-weight:900;margin:6px 0">':'<h1>'+esc(DATA.title)+'</h1>';
+  h+='<div class="search"><input type="search" id="q" placeholder="メニュー名・強化ポイントで探す" value="'+esc(S.q)+'" aria-label="検索"></div>';
+  var tk=Object.keys(tags);
+  if(tk.length) h+='<div class="tags"><button class="chip'+(S.tag?'':' on')+'" data-act="tag" data-v="">すべて</button>'+tk.map(function(t){return '<button class="chip'+(S.tag===t?' on':'')+'" data-act="tag" data-v="'+esc(t)+'">'+esc(t)+'</button>';}).join('')+'</div>';
+  if(e) h+='<div class="acts" style="margin-top:8px"><button class="btn primary" data-act="newmenu">＋ 新しいメニュー</button></div>';
+  h+='<div class="mlist" id="mlist">'+listHTML(list)+'</div>';
+  if(e) h+='<details class="bk"><summary>データのバックアップ</summary><textarea id="bk" rows="5" placeholder="書き出したデータがここに表示されます。読み込む時はここに貼り付けます。"></textarea><div class="acts"><button class="btn small" data-act="bkout">書き出し</button><button class="btn small" data-act="bkin">読み込む</button></div></details>';
+  return h+'</div>';
+}
+function listHTML(list){
+  if(!list.length) return '<div class="empty">'+(DATA.menus.length?'条件に合うメニューがありません。':'まだメニューがありません。「新しいメニュー」から作成できます。')+'</div>';
+  return list.map(function(m){
+    var meta=[m.people,m.time].filter(Boolean).join('　');
+    return '<button class="mcard" data-act="open" data-id="'+m.id+'"><div class="th">'+courtSVG(m,{mode:'all'},'')+'</div><div><h3>'+esc(m.title||'（無題）')+'</h3><div class="pu">'+esc(m.purpose)+'</div><div class="tags">'+tagsHTML(m.tags)+'</div>'+(meta?'<div class="meta">'+esc(meta)+'</div>':'')+'</div></button>';
+  }).join('');
+}
+function menuHTML(){
+  var m=curMenu();if(!m){S.screen='home';return homeHTML();}
+  var facts=[['人数',m.people],['時間',m.time],['用意',m.gear]].filter(function(x){return x[1];});
+  var h='<div class="wrap">'+topbar()+'<button class="btn plain back" data-act="home">← 一覧に戻る</button>';
+  h+='<h1>'+esc(m.title||'（無題）')+'</h1><div class="tags">'+tagsHTML(m.tags)+'</div>';
+  h+='<section class="aim"><h2>練習の目的</h2><p>'+(m.purpose?nl(m.purpose):'（未入力）')+'</p></section>';
+  if(facts.length) h+='<dl class="facts">'+facts.map(function(f){return '<div><dt>'+f[0]+'</dt><dd>'+esc(f[1])+'</dd></div>';}).join('')+'</dl>';
+  h+='<div class="seg" role="tablist"><button data-act="setmode" data-v="all" class="'+(S.mode==='all'?'on':'')+'">全体図（1枚）</button><button data-act="setmode" data-v="steps" class="'+(S.mode==='steps'?'on':'')+'">ステップ別（一覧）</button></div>';
+  h+=S.mode==='all'?allHTML(m):stepsHTML(m);
+  h+=legendHTML(m);
+  if(m.notes) h+='<div class="notes"><h2>ポイント・注意</h2><p>'+nl(m.notes)+'</p></div>';
+  h+='<div class="acts">'+(CAP.downloads?'<button class="btn" data-act="savepng" data-k="steps">画像で保存（ステップ別）</button><button class="btn" data-act="savepng" data-k="all">画像で保存（全体図）</button>':'')+(canE()?'<button class="btn primary" data-act="edit">編集する</button>':'')+'</div>';
+  return h+'</div>';
+}
+function allHTML(m){
+  return '<figure class="fig" style="margin:8px auto">'+courtSVG(m,{mode:'all'},'court')+'</figure>'
+    +'<ol class="steps">'+m.steps.map(function(s,i){return '<li><span class="sn">'+(i+1)+'</span><p>'+nl(s.text||'（説明なし）')+'</p></li>';}).join('')+'</ol>';
+}
+function stepsHTML(m){
+  var h='<div class="acts" style="margin:0"><button class="btn small" data-act="dens">'+(S.one?'2列で一覧':'1列で大きく')+'</button><span class="sz" style="align-self:center">図をタップで拡大</span></div>';
+  h+='<div class="stepgrid'+(S.one?' one':'')+'">';
+  m.steps.forEach(function(s,i){
+    var z=S.zoom[m.id+':'+i]?' zoom':'';
+    h+='<div class="scard'+z+'" data-act="zoom" data-i="'+i+'"><div class="sh"><span class="sn">'+(i+1)+'</span></div>'+courtSVG(m,{mode:i},'court')+'<p>'+nl(s.text||'')+'</p></div>';
+  });
+  return h+'</div>';
+}
+
+/* ---------- エディタ ---------- */
+function opt(v,label,cur){return '<option value="'+v+'"'+(v===cur?' selected':'')+'>'+label+'</option>';}
+function editorHTML(){
+  var m=curMenu(),E=S.ed;if(!m){S.screen='home';return homeHTML();}
+  var h='<div class="wrap">'+topbar();
+  h+='<div class="acts" style="margin:4px 0 0"><button class="btn small" data-act="done">← 完了して表示へ</button></div>';
+  h+='<div class="seg"><button data-act="tab" data-v="info" class="'+(E.tab==='info'?'on':'')+'">基本情報</button><button data-act="tab" data-v="draw" class="'+(E.tab==='draw'?'on':'')+'">図と手順</button></div>';
+  h+=E.tab==='info'?infoTab(m):drawTab(m);
+  return h+'</div>';
+}
+function infoTab(m){
+  return '<label class="fld"><span>メニュー名</span><input type="text" data-f="title" value="'+esc(m.title)+'"></label>'
+  +'<label class="fld"><span>練習の目的（どこを強化したいか）</span><textarea data-f="purpose" rows="4">'+esc(m.purpose)+'</textarea></label>'
+  +'<label class="fld"><span>強化ポイント（カンマ区切り・一覧の絞り込みに使われます）</span><input type="text" data-f="tags" value="'+esc(m.tags.join('、'))+'"></label>'
+  +'<div class="row2"><label class="fld"><span>人数</span><input type="text" data-f="people" value="'+esc(m.people)+'"></label><label class="fld"><span>時間</span><input type="text" data-f="time" value="'+esc(m.time)+'"></label></div>'
+  +'<label class="fld"><span>用意するもの</span><input type="text" data-f="gear" value="'+esc(m.gear)+'"></label>'
+  +'<label class="fld"><span>ポイント・注意</span><textarea data-f="notes" rows="4">'+esc(m.notes)+'</textarea></label>'
+  +'<label class="fld"><span>コートの表示範囲</span><select data-f="view">'+opt('half','半面（手前コート中心・見やすい）',m.view)+opt('full','全面（両コート）',m.view)+'</select></label>'
+  +'<div class="acts"><button class="btn" data-act="dup">このメニューを複製</button><button class="btn" data-act="del">削除</button></div>';
+}
+function courtOpts(){var E=S.ed;return E.all?{mode:'all'}:{mode:E.step,edit:true,pending:E.pending,pendingPid:E.pendingPid};}
+function hint(){
+  var E=S.ed;if(E.all)return '全体図の確認中です。編集するには「全体を見る」をもう一度押します。';
+  if(E.tool==='select')return 'ドラッグで選手や矢印の端点を動かせます。'+(E.step>0?'（選手の最初の位置は手順1で動かせます）':'');
+  if(E.tool==='player')return '役割を選び、コートをタップして選手を置きます。';
+  if(E.tool==='ball')return E.pending?(E.keepStart?'打球先をタップ。始点は残っているので、続けて別の打球先もタップできます。':'終点（球の落ちる場所）をタップ。'):'始点（球出しの位置や打つ選手）をタップ。';
+  return E.pendingPid?'移動先をタップ。':'動かす選手をタップ。';
+}
+function drawTab(m){
+  var E=S.ed,k=Math.min(E.step,m.steps.length-1);E.step=k;var st=m.steps[k];
+  var h='<div class="stabs">'+m.steps.map(function(s,i){return '<button class="stab'+(i===k?' on':'')+'" data-act="step" data-i="'+i+'" aria-label="手順'+(i+1)+'">'+(i+1)+'</button>';}).join('')+'<button class="stab" data-act="addstep" aria-label="手順を追加">＋</button></div>';
+  h+='<div id="edcourt" class="edcourt">'+courtSVG(m,courtOpts(),'court')+'</div>';
+  h+='<div class="tools">'
+    +[['select','調整'],['player','選手'],['ball','球'],['move','移動']].map(function(t){return '<button class="btn'+(!E.all&&E.tool===t[0]?' on':'')+'" data-act="tool" data-v="'+t[0]+'">'+t[1]+'</button>';}).join('')+'</div>';
+  if(!E.all&&E.tool==='player') h+='<div class="subtools">'+Object.keys(ROLES).map(function(r){return '<button class="chip'+(E.role===r?' on':'')+'" data-act="role" data-v="'+r+'">'+ROLES[r].name+'</button>';}).join('')+'</div>';
+  if(!E.all&&E.tool==='ball') h+='<div class="subtools">'+Object.keys(KINDS).map(function(r){return '<button class="chip'+(E.kind===r?' on':'')+'" data-act="kind" data-v="'+r+'">'+KINDS[r].name+'</button>';}).join('')+'<button class="chip'+(E.keepStart?' on':'')+'" data-act="keep">打球先を連続追加（始点を残す）</button></div>';
+  h+='<div class="subtools"><button class="chip'+(E.all?' on':'')+'" data-act="allview">全体を見る</button></div>';
+  h+='<p class="hint" id="edhint">'+hint()+'</p>';
+  h+='<label class="fld"><span>手順'+(k+1)+'の説明</span><textarea data-st="text" rows="3">'+esc(st.text)+'</textarea></label>';
+  h+='<div id="editems">'+itemsHTML(m)+'</div>';
+  h+='<div class="acts"><button class="btn small" data-act="delstep">この手順を削除</button></div>';
+  return h;
+}
+function itemsHTML(m){
+  var k=S.ed.step,st=m.steps[k],pl=byId(m),h='',gb=geom(m,k).balls;
+  if(st.balls.length||st.moves.length){
+    h+='<div class="sub">この手順の矢印</div>';
+    st.balls.forEach(function(b,i){h+='<div class="irow"><span class="grow">球'+(gb[i]&&gb[i].label?'（打ち分け '+gb[i].label+'）':'')+'</span><select data-bk="'+i+'">'+opt('feed','球出し',b.kind)+opt('hit','打球',b.kind)+'</select><button class="btn small" data-act="delball" data-i="'+i+'">削除</button></div>';});
+    st.moves.forEach(function(mv,i){var p=pl[mv.pid];h+='<div class="irow"><span class="grow">移動：'+esc(p?(p.label||ROLES[p.role].short):'?')+'</span><button class="btn small" data-act="delmove" data-i="'+i+'">削除</button></div>';});
+  }
+  h+='<div class="sub">選手</div>';
+  if(!m.players.length) h+='<p class="hint">「選手」ツールで役割を選び、コートをタップして置きます。</p>';
+  m.players.forEach(function(p){
+    h+='<div class="prow"><select data-pr="'+p.id+'">'+Object.keys(ROLES).map(function(r){return opt(r,ROLES[r].name,p.role);}).join('')+'</select><input type="text" maxlength="3" data-pl="'+p.id+'" value="'+esc(p.label)+'" aria-label="表示名"><button class="btn small" data-act="delplayer" data-id="'+p.id+'">削除</button></div>';
+  });
+  return h;
+}
+function refreshCourt(){var c=$('#edcourt');if(c)c.innerHTML=courtSVG(curMenu(),courtOpts(),'court');}
+function refreshItems(){var m=curMenu(),i=$('#editems'),hn=$('#edhint');if(i)i.innerHTML=itemsHTML(m);if(hn)hn.textContent=hint();}
+
+/* ---------- 描画制御 ---------- */
+function render(top){
+  var y=window.scrollY;
+  var root=$('#root');
+  root.innerHTML=S.screen==='home'?homeHTML():(S.screen==='menu'?menuHTML():editorHTML());
+  if(S.screen==='edit'&&S.ed.tab==='draw') bindCourt();
+  window.scrollTo(0,top?0:y);
+}
+function go(screen,id){S.screen=screen;if(id)S.id=id;render(true);}
+var toastT=null;
+function toast(msg){
+  var t=$('#toast');if(!t){t=document.createElement('div');t.id='toast';t.className='toast';t.setAttribute('role','status');document.body.appendChild(t);}
+  t.textContent=msg;t.style.display='block';clearTimeout(toastT);toastT=setTimeout(function(){t.style.display='none';},2600);
+}
+function armed(btn){
+  if(btn.dataset.armed) return true;
+  btn.dataset.armed='1';btn.dataset.o=btn.textContent;btn.textContent='もう一度押して削除';btn.classList.add('danger');
+  setTimeout(function(){if(btn.isConnected){delete btn.dataset.armed;btn.textContent=btn.dataset.o;btn.classList.remove('danger');}},3000);
+  return false;
+}
+
+/* ---------- コート操作 ---------- */
+var drag=null;
+function toXY(svg,ev){
+  var pt=svg.createSVGPoint();pt.x=ev.clientX;pt.y=ev.clientY;
+  var q=pt.matrixTransform(svg.getScreenCTM().inverse());
+  var vb=viewBoxFor(curMenu().view);
+  return [Math.max(vb[0],Math.min(vb[0]+vb[2],r1(q.x))),Math.max(vb[1],Math.min(vb[1]+vb[3],r1(q.y)))];
+}
+function bindCourt(){
+  var c=$('#edcourt');if(!c)return;
+  c.addEventListener('pointerdown',function(ev){
+    var svg=c.querySelector('svg');if(!svg||S.ed.all)return;
+    var m=curMenu(),E=S.ed,st=m.steps[E.step],xy=toXY(svg,ev);
+    if(E.tool==='select'){
+      var h=ev.target.closest&&ev.target.closest('[data-h]');
+      if(h){drag=h.getAttribute('data-h');try{c.setPointerCapture(ev.pointerId);}catch(e){}ev.preventDefault();}
+      return;
+    }
+    ev.preventDefault();
+    var gm=geom(m,E.step);
+    if(E.tool==='player'){
+      var n=m.players.filter(function(p){return p.role===E.role;}).length,r=ROLES[E.role];
+      m.players.push({id:uid(),role:E.role,label:n?r.short+(n+1):r.short,x:xy[0],y:xy[1]});
+    }else if(E.tool==='ball'){
+      if(!E.pending){
+        var s=xy,best=null,bd=R+0.8;
+        Object.keys(gm.pos).forEach(function(id){var d=dist(gm.pos[id],xy);if(d<bd){bd=d;best=gm.pos[id];}});
+        gm.moves.forEach(function(mv){var d=dist(mv.to,xy);if(d<bd){bd=d;best=mv.to;}});
+        if(best)s=[best[0],best[1]];
+        E.pending=s;
+      }else{
+        var sp=E.pending;st.balls.push({kind:E.kind,x1:sp[0],y1:sp[1],x2:xy[0],y2:xy[1]});E.pending=E.keepStart?sp:null;
+      }
+    }else if(E.tool==='move'){
+      if(!E.pendingPid){
+        var bp=null,bdd=1.9;
+        Object.keys(gm.pos).forEach(function(id){var d=dist(gm.pos[id],xy);if(d<bdd){bdd=d;bp=id;}});
+        if(!bp){toast('先に動かす選手をタップしてください');return;}
+        E.pendingPid=bp;
+      }else{
+        var pid=E.pendingPid;
+        st.moves=st.moves.filter(function(mv){return mv.pid!==pid;});
+        st.moves.push({pid:pid,x:xy[0],y:xy[1]});E.pendingPid=null;
+      }
+    }
+    touch();refreshCourt();refreshItems();
+  });
+  c.addEventListener('pointermove',function(ev){
+    if(!drag)return;
+    var svg=c.querySelector('svg');if(!svg)return;
+    var m=curMenu(),st=m.steps[S.ed.step],xy=toXY(svg,ev),p=drag.split(':');
+    if(p[0]==='p'){var pl=byId(m)[p[1]];if(pl){pl.x=xy[0];pl.y=xy[1];}}
+    else if(p[0]==='m'){var mv=st.moves[+p[1]];if(mv){mv.x=xy[0];mv.y=xy[1];}}
+    else if(p[0]==='b'){var b=st.balls[+p[1]];if(b){if(p[2]==='a'){b.x1=xy[0];b.y1=xy[1];}else{b.x2=xy[0];b.y2=xy[1];}}}
+    touch();refreshCourt();
+  });
+  var end=function(){drag=null;};
+  c.addEventListener('pointerup',end);c.addEventListener('pointercancel',end);
+}
+
+/* ---------- 操作 ---------- */
+function newMenu(){return {id:uid(),title:'新しい練習メニュー',purpose:'',tags:[],people:'',time:'',gear:'',notes:'',view:'half',players:[],steps:[{text:'',balls:[],moves:[]}]};}
+function onClick(ev){
+  var t=ev.target.closest('[data-act]');if(!t)return;
+  var a=t.dataset.act,m=curMenu(),E=S.ed;
+  switch(a){
+    case 'open':S.id=t.dataset.id;S.mode='all';go('menu');break;
+    case 'home':go('home');break;
+    case 'tag':S.tag=t.dataset.v;render();break;
+    case 'setmode':S.mode=t.dataset.v;render();break;
+    case 'dens':S.one=!S.one;render();break;
+    case 'zoom':var key=m.id+':'+t.dataset.i;S.zoom[key]=!S.zoom[key];render();break;
+    case 'preview':S.preview=!S.preview;render();break;
+    case 'newmenu':var nm=newMenu();DATA.menus.push(nm);S.id=nm.id;E.tab='info';E.step=0;E.tool='select';E.pending=null;E.pendingPid=null;E.all=false;touch();go('edit');break;
+    case 'edit':E.tab='info';E.step=0;E.tool='select';E.pending=null;E.pendingPid=null;E.all=false;go('edit');break;
+    case 'done':go('menu');break;
+    case 'tab':E.tab=t.dataset.v;render();break;
+    case 'dup':var c=JSON.parse(JSON.stringify(m));c.id=uid();c.title=m.title+'（コピー）';DATA.menus.push(c);S.id=c.id;touch();toast('複製しました');render(true);break;
+    case 'del':if(!armed(t))return;DATA.menus=DATA.menus.filter(function(x){return x.id!==m.id;});touch();go('home');break;
+    case 'tool':E.tool=t.dataset.v;E.all=false;E.pending=null;E.pendingPid=null;render();break;
+    case 'role':E.role=t.dataset.v;render();break;
+    case 'kind':E.kind=t.dataset.v;render();break;
+    case 'keep':E.keepStart=!E.keepStart;E.pending=null;render();break;
+    case 'allview':E.all=!E.all;E.pending=null;E.pendingPid=null;render();break;
+    case 'step':E.step=+t.dataset.i;E.pending=null;E.pendingPid=null;render();break;
+    case 'addstep':m.steps.push({text:'',balls:[],moves:[]});E.step=m.steps.length-1;E.pending=null;E.pendingPid=null;touch();render();break;
+    case 'delstep':
+      if(m.steps.length<2){toast('手順は最低1つ必要です');return;}
+      if(!armed(t))return;
+      m.steps.splice(E.step,1);E.step=Math.max(0,E.step-1);touch();render();break;
+    case 'delball':m.steps[E.step].balls.splice(+t.dataset.i,1);touch();refreshCourt();refreshItems();break;
+    case 'delmove':m.steps[E.step].moves.splice(+t.dataset.i,1);touch();refreshCourt();refreshItems();break;
+    case 'delplayer':
+      var id=t.dataset.id;m.players=m.players.filter(function(p){return p.id!==id;});
+      m.steps.forEach(function(s){s.moves=s.moves.filter(function(mv){return mv.pid!==id;});});
+      touch();refreshCourt();refreshItems();break;
+    case 'publish':publish();break;
+    case 'savepng':savePng(m,t.dataset.k);break;
+    case 'draftload':var d=readDraft();if(d){DATA=d;normalize();S.dirty=true;}render();break;
+    case 'draftdrop':try{localStorage.removeItem(DRAFT);}catch(e){}render();break;
+    case 'bkout':var ta=$('#bk');if(ta){ta.value=JSON.stringify(DATA);}saveText(DATA.title+'.json',JSON.stringify(DATA));break;
+    case 'bkin':
+      try{var j=JSON.parse($('#bk').value);if(!j||!Array.isArray(j.menus))throw 0;DATA=j;normalize();touch();toast('読み込みました');render();}
+      catch(e){toast('データの形式が正しくありません');}
+      break;
+  }
+}
+function onInput(ev){
+  var t=ev.target,m=curMenu();
+  if(t.id==='q'){S.q=t.value;var l=$('#mlist');if(l){var q=S.q.trim().toLowerCase();l.innerHTML=listHTML(DATA.menus.filter(function(x){return (!S.tag||x.tags.indexOf(S.tag)>=0)&&(!q||(x.title+' '+x.purpose+' '+x.tags.join(' ')+' '+x.notes).toLowerCase().indexOf(q)>=0);}));}return;}
+  if(t.dataset.app==='title'){DATA.title=t.value;touch();return;}
+  if(!m)return;
+  if(t.dataset.f){
+    var f=t.dataset.f;
+    if(f==='tags')m.tags=t.value.split(/[,、，\s]+/).filter(Boolean);
+    else m[f]=t.value;
+    touch();return;
+  }
+  if(t.dataset.st==='text'){m.steps[S.ed.step].text=t.value;touch();return;}
+  if(t.dataset.pl){var p=byId(m)[t.dataset.pl];if(p){p.label=t.value;touch();refreshCourt();}return;}
+}
+function onChange(ev){
+  var t=ev.target,m=curMenu();if(!m)return;
+  if(t.dataset.f==='view'){m.view=t.value;touch();return;}
+  if(t.dataset.pr){var p=byId(m)[t.dataset.pr];if(p){p.role=t.value;touch();refreshCourt();}return;}
+  if(t.dataset.bk!==undefined){m.steps[S.ed.step].balls[+t.dataset.bk].kind=t.value;touch();refreshCourt();}
+}
+
+/* ---------- 保存・共有 ---------- */
+function buildDoc(){
+  var css=$('#css').textContent,app=$('#app').textContent;
+  var json=JSON.stringify(DATA).replace(/</g,'\\u003c');
+  return '<!doctype html>\n<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>'+esc(DATA.title)+'</title><link rel="stylesheet" href="'+FONT_HREF+'"><style id="css">'+css+'</style></head><body><div id="root"></div><script id="data" type="application/json">'+json+'<\/script><script id="app">'+app+'<\/script></body></html>';
+}
+function publish(){
+  if(!CAP.artifact){toast('この環境では共有に反映できません');return;}
+  CAP.artifact.publish(buildDoc()).then(function(){
+    try{localStorage.removeItem(DRAFT);}catch(e){}
+    toast('共有に反映しました');
+  }).catch(function(e){
+    var c=e&&e.code;
+    if(c==='conflict')return;
+    toast(c==='not_writer'||c==='not_granted'?'編集権限がないため反映できません':'反映に失敗しました。もう一度お試しください');
+  });
+}
+function saveText(name,text){
+  if(!CAP.downloads)return;
+  CAP.downloads.save({filename:name,data:text}).catch(function(){});
+}
+function wrapLines(str,maxPx,fs){
+  var out=[];
+  String(str||'').split('\n').forEach(function(par){
+    var line='',w=0;
+    for(var i=0;i<par.length;i++){
+      var ch=par[i],cw=(ch.charCodeAt(0)>255?1:0.56)*fs;
+      if(w+cw>maxPx){out.push(line);line='';w=0;}
+      line+=ch;w+=cw;
+    }
+    out.push(line);
+  });
+  return out;
+}
+function legendSVG(m,x,y,maxX){
+  var roles={},kinds={},mv=false,ink='#14213D',out='',cx=x,cy=y,items=[];
+  m.players.forEach(function(p){roles[p.role]=1;});
+  m.steps.forEach(function(s){s.balls.forEach(function(b){kinds[b.kind]=1;});if(s.moves.length)mv=true;});
+  Object.keys(ROLES).forEach(function(r){if(roles[r])items.push({t:'r',c:ROLES[r].fill,l:ROLES[r].name,w:34+ROLES[r].name.length*26+24});});
+  Object.keys(KINDS).forEach(function(k){if(kinds[k])items.push({t:'l',c:KINDS[k].color,d:true,l:KINDS[k].name,w:68+KINDS[k].name.length*26+24});});
+  if(mv)items.push({t:'l',c:'#FFFFFF',d:false,l:'選手の移動（薄い丸が移動先）',w:68+13*26+24});
+  items.forEach(function(it){
+    if(cx>x&&cx+it.w>maxX){cx=x;cy+=40;}
+    if(it.t==='r'){
+      out+='<circle cx="'+(cx+12)+'" cy="'+(cy+14)+'" r="12" fill="'+it.c+'" stroke="'+ink+'" stroke-width="2"/><text x="'+(cx+32)+'" y="'+(cy+23)+'" font-size="26" font-weight="700" fill="'+ink+'">'+esc(it.l)+'</text>';
+    }else{
+      out+='<rect x="'+cx+'" y="'+(cy+2)+'" width="56" height="24" rx="6" fill="#4E9A6B"/><line x1="'+(cx+6)+'" y1="'+(cy+14)+'" x2="'+(cx+40)+'" y2="'+(cy+14)+'" stroke="'+it.c+'" stroke-width="4"'+(it.d?' stroke-dasharray="8 6"':'')+'/><polygon points="'+(cx+52)+','+(cy+14)+' '+(cx+38)+','+(cy+6)+' '+(cx+38)+','+(cy+22)+'" fill="'+it.c+'"/><text x="'+(cx+66)+'" y="'+(cy+23)+'" font-size="26" font-weight="700" fill="'+ink+'">'+esc(it.l)+'</text>';
+    }
+    cx+=it.w;
+  });
+  return {svg:out,h:items.length?(cy-y)+40:0};
+}
+function savePng(m,kind){
+  if(!CAP.downloads)return;
+  var steps=kind==='steps';
+  try{
+    var W=1080,pad=56,y=pad,body='',ink='#14213D',sub='#4F5E75',H;
+    var tl=wrapLines(m.title,W-2*pad,52);
+    tl.forEach(function(l,i){body+='<text x="'+pad+'" y="'+(y+46+i*64)+'" font-size="52" font-weight="900" fill="'+ink+'">'+esc(l)+'</text>';});
+    y+=tl.length*64+6;
+    if(m.tags.length){body+='<text x="'+pad+'" y="'+(y+30)+'" font-size="28" font-weight="700" fill="'+sub+'">強化：'+esc(m.tags.join(' / '))+'</text>';y+=48;}
+    var pl=wrapLines(m.purpose,W-2*pad-48,30),bh=pl.length*44+78;
+    body+='<rect x="'+pad+'" y="'+(y+8)+'" width="'+(W-2*pad)+'" height="'+bh+'" rx="18" fill="#E2EFE6"/>';
+    body+='<text x="'+(pad+24)+'" y="'+(y+52)+'" font-size="28" font-weight="900" fill="'+ink+'">練習の目的</text>';
+    pl.forEach(function(l,i){body+='<text x="'+(pad+24)+'" y="'+(y+100+i*44)+'" font-size="30" font-weight="700" fill="'+ink+'">'+esc(l)+'</text>';});
+    y+=bh+28;
+    var meta=[['人数',m.people],['時間',m.time],['用意',m.gear]].filter(function(x){return x[1];}).map(function(x){return x[0]+' '+x[1];}).join('　');
+    if(meta){body+='<text x="'+pad+'" y="'+(y+28)+'" font-size="26" font-weight="700" fill="'+sub+'">'+esc(meta)+'</text>';y+=52;}
+    var vb=viewBoxFor(m.view);
+    if(!steps){
+      var cw=520,ch=Math.round(cw*vb[3]/vb[2]),top=y+10;
+      body+='<svg x="'+pad+'" y="'+top+'" width="'+cw+'" height="'+ch+'" viewBox="'+vb.join(' ')+'">'+courtInner(m,{mode:'all'})+'</svg>';
+      var tx=pad+cw+36,tw=W-pad-tx,ty=top+8;
+      m.steps.forEach(function(s,i){
+        var ls=wrapLines(s.text||'',tw-52,28);
+        body+='<circle cx="'+(tx+18)+'" cy="'+(ty+20)+'" r="18" fill="'+ink+'"/><text x="'+(tx+18)+'" y="'+(ty+30)+'" font-size="24" font-weight="900" fill="#fff" text-anchor="middle">'+(i+1)+'</text>';
+        ls.forEach(function(l,j){body+='<text x="'+(tx+48)+'" y="'+(ty+30+j*40)+'" font-size="28" font-weight="500" fill="'+ink+'">'+esc(l)+'</text>';});
+        ty+=Math.max(ls.length*40,40)+20;
+      });
+      if(m.notes){
+        var nl2=wrapLines(m.notes,tw,26);
+        body+='<text x="'+tx+'" y="'+(ty+30)+'" font-size="26" font-weight="900" fill="'+ink+'">ポイント・注意</text>';
+        nl2.forEach(function(l,j){body+='<text x="'+tx+'" y="'+(ty+72+j*38)+'" font-size="26" font-weight="500" fill="'+ink+'">'+esc(l)+'</text>';});
+        ty+=72+nl2.length*38;
+      }
+      var bottom=Math.max(top+ch,ty)+24,lg=legendSVG(m,pad,bottom,W-pad);
+      body+=lg.svg;H=bottom+lg.h+pad;
+    }else{
+      var lg2=legendSVG(m,pad,y+4,W-pad);body+=lg2.svg;y+=lg2.h+20;
+      var gap=24,cwid=(W-2*pad-gap)/2,ip=16,courtW=cwid-2*ip,courtH=Math.round(courtW*vb[3]/vb[2]);
+      var cards=m.steps.map(function(s){var ls=wrapLines(s.text||'',courtW,26);return {ls:ls,h:ip+44+courtH+14+Math.max(ls.length,1)*38+ip};});
+      for(var r=0;r<cards.length;r+=2){
+        var rh=Math.max(cards[r].h,cards[r+1]?cards[r+1].h:0);
+        for(var c=0;c<2&&r+c<cards.length;c++){
+          var i2=r+c,cd=cards[i2],cx0=pad+c*(cwid+gap);
+          body+='<rect x="'+cx0+'" y="'+y+'" width="'+cwid+'" height="'+rh+'" rx="16" fill="#FFFFFF" stroke="#D3DCD4" stroke-width="2"/>';
+          body+='<circle cx="'+(cx0+ip+18)+'" cy="'+(y+ip+20)+'" r="18" fill="'+ink+'"/><text x="'+(cx0+ip+18)+'" y="'+(y+ip+29)+'" font-size="24" font-weight="900" fill="#fff" text-anchor="middle">'+(i2+1)+'</text>';
+          body+='<svg x="'+(cx0+ip)+'" y="'+(y+ip+44)+'" width="'+courtW+'" height="'+courtH+'" viewBox="'+vb.join(' ')+'">'+courtInner(m,{mode:i2})+'</svg>';
+          cd.ls.forEach(function(l,j){body+='<text x="'+(cx0+ip)+'" y="'+(y+ip+44+courtH+14+28+j*38)+'" font-size="26" font-weight="500" fill="'+ink+'">'+esc(l)+'</text>';});
+        }
+        y+=rh+gap;
+      }
+      if(m.notes){
+        var nl3=wrapLines(m.notes,W-2*pad,26);
+        body+='<text x="'+pad+'" y="'+(y+30)+'" font-size="26" font-weight="900" fill="'+ink+'">ポイント・注意</text>';
+        nl3.forEach(function(l,j){body+='<text x="'+pad+'" y="'+(y+72+j*38)+'" font-size="26" font-weight="500" fill="'+ink+'">'+esc(l)+'</text>';});
+        y+=72+nl3.length*38;
+      }
+      H=y+pad;
+    }
+    var svg='<svg xmlns="http://www.w3.org/2000/svg" width="'+W+'" height="'+H+'" viewBox="0 0 '+W+' '+H+'" font-family="'+FONT+'"><rect width="'+W+'" height="'+H+'" fill="#FFFFFF"/>'+body+'</svg>';
+    var sc=Math.min(2,Math.sqrt(14000000/(W*H)));
+    var img=new Image();
+    img.onload=function(){
+      try{
+        var cv=document.createElement('canvas');cv.width=Math.round(W*sc);cv.height=Math.round(H*sc);
+        var cx=cv.getContext('2d');cx.fillStyle='#fff';cx.fillRect(0,0,cv.width,cv.height);cx.drawImage(img,0,0,cv.width,cv.height);
+        cv.toBlob(function(b){
+          if(!b){toast('画像を作れませんでした');return;}
+          CAP.downloads.save({filename:(m.title||'menu')+(steps?'（ステップ別）':'（全体図）')+'.png',data:b}).then(function(){toast('保存しました');}).catch(function(e){if(!e||e.code!=='declined')toast('保存できませんでした');});
+        },'image/png');
+      }catch(e){toast('画像を作れませんでした');}
+    };
+    img.onerror=function(){toast('画像を作れませんでした');};
+    img.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);
+  }catch(e){toast('画像を作れませんでした');}
+}
+
+/* ---------- 起動 ---------- */
+var rootEl=$('#root');
+rootEl.addEventListener('click',onClick);
+rootEl.addEventListener('input',onInput);
+rootEl.addEventListener('change',onChange);
+render(true);
+
+(function initCaps(){
+  if(!window.claude||!window.claude.use) return;
+  var p=[];
+  p.push(window.claude.use('user').then(function(u){S.canEdit=!!(u&&u.canEdit&&u.canEdit());}).catch(function(){}));
+  p.push(window.claude.use('artifact').then(function(a){CAP.artifact=a;}).catch(function(){}));
+  p.push(window.claude.use('downloads').then(function(d){CAP.downloads=d;}).catch(function(){}));
+  Promise.all(p).then(function(){if(S.screen!=='edit')render();});
+})();
+})();
+</script></body></html>
